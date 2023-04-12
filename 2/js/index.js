@@ -15,7 +15,7 @@ const isLogin = () => {
 const readTodo = () => {
   todoContainerEl.innerHTML = ''; // 다 날림
 
-  const todos = JSON.parse(localStorage.getItem('todos')).reverse();
+  const todos = JSON.parse(localStorage.getItem('todos')).reverse(); // 목록 뒤집기
 
   todos.forEach(todo => {
     const divEl = document.createElement('div');
@@ -90,5 +90,14 @@ const deleteTodo = (deleteId) => {
   readTodo();
 };
 
+const updateComplete = (updatedId, isChecked) => { // 기존의 데이터에서 업데이트 한부분만 바뀌어야한다...
+  const todos = JSON.parse(localStorage.getItem('todos'));
+  const findedTodos = todos.find(todo => todo.id === updatedId);
+
+  findedTodos.complete = isChecked; // 완료 한 부분 체크
+
+  localStorage.setItem('todos', JSON.stringify(todos));
+  readTodo();
+};
 
 document.addEventListener('DOMContentLoaded', init);
