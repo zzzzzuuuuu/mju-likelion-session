@@ -79,7 +79,7 @@ const init = () => {
   readTodo();
 
   todoButtonEl.addEventListener('click', createTodo);
-  // logoutButtonEl.addEventListener('click', logout);
+  logoutButtonEl.addEventListener('click', logout);
 };
 
 const deleteTodo = (deleteId) => {
@@ -90,7 +90,7 @@ const deleteTodo = (deleteId) => {
   readTodo();
 };
 
-const updateComplete = (updatedId, isChecked) => { // 기존의 데이터에서 업데이트 한부분만 바뀌어야한다...
+const updateComplete = (updatedId, isChecked) => {
   const todos = JSON.parse(localStorage.getItem('todos'));
   const findedTodos = todos.find(todo => todo.id === updatedId);
 
@@ -98,6 +98,10 @@ const updateComplete = (updatedId, isChecked) => { // 기존의 데이터에서 
 
   localStorage.setItem('todos', JSON.stringify(todos));
   readTodo();
+};
+const logout = () => {
+  localStorage.removeItem('login');
+  location.href = './signin.html';
 };
 
 document.addEventListener('DOMContentLoaded', init);
